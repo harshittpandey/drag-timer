@@ -1,0 +1,1 @@
+{"version":3,"file":"PaletteBuilder.js","sourceRoot":"","sources":["../../../src/palette/types/PaletteBuilder.ts"],"names":[],"mappings":";;;AAGA,MAAM,cAAc;IAClB,YAAa,WAAyB,EAAE,aAA4B;QAClE,OAAO,CAAC,GAAG,CAAC,aAAa,EAAE,WAAW,CAAC,CAAA;QACvC,OAAO,CAAC,GAAG,CAAC,eAAe,EAAE,aAAa,CAAC,CAAA;IAC7C,CAAC;CACF;AAEQ,wCAAc"}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/index.css">
+  <script src="./dist/index.js" type="module"></script>
+</head>
+<body onload="">
+  <div class="flex h-screen">
+    <div class="w-2/12 h-full py-6 px-4 overflow-y-scroll" id="palettes">
+      <div class="warning-text text-red-500">Drag and drop these items to the canvas</div>
+    </div>
+    <div class="w-10/12 h-full p-8 flex items-center justify-center" id="canvas"></div>
+  </div>
+</body>
+</html>
