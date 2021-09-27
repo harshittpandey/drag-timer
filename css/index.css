@@ -140,20 +140,34 @@
 
 /* color palette */
 
-#color-palette {
+#color-palette, #bgcolor-palette {
   overflow-x: scroll;
 }
-#color-palette .items-container {
+#color-palette .items-container,
+#bgcolor-palette .items-container {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
   /* width: fit-content; */
 }
 
-#color-palette .color {
+#color-palette .color,
+#bgcolor-palette .color {
   width: 30px;
   height: 30px;
   margin-bottom: 0 !important;
+}
+
+#bg-transparent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid gray;
+  font-family: unset;
+}
+
+#bg-transparent:before {
+  content: "X";
 }
 
 .selector {

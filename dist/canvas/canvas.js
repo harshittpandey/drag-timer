@@ -15,6 +15,8 @@ class Canvas {
         this.key = key;
         this.shape = config.shape;
         this.stroke = config.stroke;
+        this.color = config.color;
+        this.bgColor = config.bgColor;
         this.element = this.renderCanvas();
         this.configure();
     }
@@ -55,9 +57,13 @@ class Canvas {
                 break;
             }
         }
-        const color = this.stroke.color || 'white';
+        const color = this.color.name ? `border-${this.color.name}` : 'white';
         strokeClasses.push(color);
         element.classList.add(...strokeClasses);
+    }
+    setBackground(element) {
+        const bgColor = (this.bgColor && !!this.bgColor.name) ? `bg-${this.bgColor.name}` : 'bg-transparent';
+        element.classList.add(bgColor);
     }
     renderCanvas() {
         this.hostElement.innerHTML = '';
@@ -68,7 +74,10 @@ class Canvas {
         this.hostElement.append(diagram);
         // stroke styles
         this.setStroke(element);
-        // strok styles:end
+        // stroke styles:end
+        // color 
+        this.setBackground(element);
+        // color : end
         return diagram;
     }
     dragOverHandler(event) {
@@ -87,6 +96,12 @@ class Canvas {
         }
         else if (obj.hasOwnProperty('stroke')) {
             this.stroke = obj.stroke;
+        }
+        else if (obj.hasOwnProperty('color')) {
+            this.color = obj.color;
+        }
+        else if (obj.hasOwnProperty('bgColor')) {
+            this.bgColor = obj.bgColor;
         }
         this.renderCanvas();
         this.element = this.renderCanvas();

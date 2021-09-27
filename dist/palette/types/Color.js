@@ -7,9 +7,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { PALETTE_TYPE, createHtmlElement } from "../shared.js";
 import { autobind } from "../../shared/decorators.js";
 class ColorBuilder {
-    constructor(name) {
-        this.paletteType = PALETTE_TYPE.Color;
+    constructor(name, paletteType) {
         this.name = name;
+        this.paletteType = paletteType;
         this.element = this.renderColor();
         this.configure();
     }
@@ -21,7 +21,8 @@ class ColorBuilder {
     //   return element
     // }
     renderColor() {
-        return createHtmlElement('div', `color-${this.name}`, ['color', `bg-${this.name}`, 'selector']);
+        const className = this.paletteType === PALETTE_TYPE.Color ? 'color' : 'bg';
+        return createHtmlElement('div', `${className}-${this.name}`, ['color', `bg-${this.name}`, 'selector']);
     }
     htmlBuilder() {
         const el = this.element;
@@ -37,9 +38,10 @@ class ColorBuilder {
     }
     // drag methods
     dragStartHandler(event) {
-        console.log('dragStart from color');
+        const dragType = this.paletteType === PALETTE_TYPE.Color ? 'color' : 'bgColor';
+        console.log('dragStart from ', dragType);
         event.dataTransfer.setData('text/plain', JSON.stringify({
-            color: {
+            [dragType]: {
                 name: this.name
             }
         }));

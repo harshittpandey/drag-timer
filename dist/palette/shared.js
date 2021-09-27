@@ -18,6 +18,7 @@ var PALETTE_TYPE;
     PALETTE_TYPE[PALETTE_TYPE["Shape"] = 0] = "Shape";
     PALETTE_TYPE[PALETTE_TYPE["Stroke"] = 1] = "Stroke";
     PALETTE_TYPE[PALETTE_TYPE["Color"] = 2] = "Color";
+    PALETTE_TYPE[PALETTE_TYPE["BgColor"] = 3] = "BgColor";
 })(PALETTE_TYPE || (PALETTE_TYPE = {}));
 // type PaletteType = { Shape: PALETTE_TYPE.Shape }
 // draggable

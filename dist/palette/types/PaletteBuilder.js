@@ -17,16 +17,18 @@ class PaletteBuilder {
         }
         else if (paletteType === PALETTE_TYPE.Color) {
             const color = builderObject;
-            const createdColor = new ColorBuilder(color.name);
+            const createdColor = new ColorBuilder(color.name, PALETTE_TYPE.Color);
             this.paletteInstance = createdColor;
-            // const el = this.createHtmlElement('div', '', [])
-            // el.append(createdColor.htmlBuilder())
-            // container.append(el)
+        }
+        else if (paletteType === PALETTE_TYPE.BgColor) {
+            const bgColor = builderObject;
+            const createdBgColor = new ColorBuilder(bgColor.name, PALETTE_TYPE.BgColor);
+            this.paletteInstance = createdBgColor;
         }
     }
     htmlBuilder() {
         if (this.paletteInstance) {
-            if (this.paletteType === PALETTE_TYPE.Color) {
+            if (this.paletteType === PALETTE_TYPE.Color || this.paletteType === PALETTE_TYPE.BgColor) {
                 const el = createHtmlElement('div', '', []);
                 el.append(this.paletteInstance.htmlBuilder());
                 return el;

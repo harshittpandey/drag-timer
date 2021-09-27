@@ -6,7 +6,7 @@ import {Stroke} from "./palette/types/Stroke.js"
 import {Color} from "./palette/types/Color.js"
 import { ShapesItemsList } from "./palette/items/Shape.js"
 import { StrokesItemsList } from "./palette/items/Stroke.js"
-import { ColorsItemsList } from "./palette/items/Color.js"
+import { ColorsItemsList, TransparentColor } from "./palette/items/Color.js"
 
 import { ProjectState } from "./state/ProjectState.js"
 
@@ -25,11 +25,17 @@ function init() {
   const strokePalette = new Palette(paletteContainer, "stroke-palette", "Strokes", PALETTE_TYPE.Stroke)
   strokePalette.renderItems(strokes.map(s => ({ ...s, paletteType: PALETTE_TYPE.Stroke }) ))
   /*
-    color palette
+    stroke color palette
   */
   const colors: Color[] = ColorsItemsList
-  const colorPalette = new Palette(paletteContainer, "color-palette", "Colors", PALETTE_TYPE.Color)
+  const colorPalette = new Palette(paletteContainer, "color-palette", "Stroke Colors", PALETTE_TYPE.Color)
   colorPalette.renderItems(colors.map(c => ({ ...c, paletteType: PALETTE_TYPE.Color }) ))
+  /*
+    background color palette
+  */
+  const backgroundColors: Color[] = [TransparentColor, ...ColorsItemsList]
+  const bgColorPalette = new Palette(paletteContainer, "bgcolor-palette", "Background Colors", PALETTE_TYPE.BgColor)
+  bgColorPalette.renderItems(backgroundColors.map(c => ({ ...c, paletteType: PALETTE_TYPE.BgColor }) ))
   /*
     canvas
   */

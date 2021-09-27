@@ -1,18 +1,22 @@
 import { PALETTE_TYPE, Draggable, createHtmlElement } from "../shared.js"
 import {autobind} from "../../shared/decorators.js"
 
+type ALLOWED_COLORS_TYPES = PALETTE_TYPE.Color | PALETTE_TYPE.BgColor
+
 interface Color {
-  paletteType?: PALETTE_TYPE.Color,
+  paletteType?: ALLOWED_COLORS_TYPES,
   name: string
 }
 
+
 class ColorBuilder implements Color, Draggable {
-  paletteType: PALETTE_TYPE.Color = PALETTE_TYPE.Color
+  paletteType: ALLOWED_COLORS_TYPES
   name: string
   element: HTMLElement
 
-  constructor(name: string) {
+  constructor(name: string, paletteType: ALLOWED_COLORS_TYPES) {
     this.name = name
+    this.paletteType = paletteType
     
     this.element = this.renderColor()
     this.configure()
@@ -27,7 +31,8 @@ class ColorBuilder implements Color, Draggable {
   // }
 
   private renderColor ():HTMLElement {
-    return createHtmlElement('div', `color-${this.name}`, ['color', `bg-${this.name}`, 'selector'])
+    const className = this.paletteType === PALETTE_TYPE.Color ? 'color' : 'bg'
+    return createHtmlElement('div', `${className}-${this.name}`, ['color', `bg-${this.name}`, 'selector'])
   }
 
   htmlBuilder (): HTMLElement {
@@ -46,10 +51,11 @@ class ColorBuilder implements Color, Draggable {
   // drag methods
   @autobind
   dragStartHandler(event: DragEvent) {
-    console.log('dragStart from color')
+    const dragType = this.paletteType === PALETTE_TYPE.Color ? 'color' : 'bgColor'
+    console.log('dragStart from ', dragType)
     event.dataTransfer!.setData('text/plain', 
       JSON.stringify({
-        color: {
+        [dragType]: {
           name: this.name
         }
       })

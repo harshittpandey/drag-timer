@@ -1,4 +1,4 @@
-import { Shape, Stroke } from "../palette/paletteTypes.js"
+import { Shape, Stroke, Color } from "../palette/paletteTypes.js"
 import { STROKE_ENUM } from "../palette/shared.js"
 import { autobind } from "../shared/decorators.js"
 import { DragTarget } from "../shared/dragDrop.js"
@@ -6,22 +6,32 @@ import { createHtmlElement } from "../shared/utils.js"
 import { ShapeItemsObj } from "../palette/items/Shape.js"
 import { defaultConfig } from "../palette/items/default.js"
 
+type RESPONSE_TYPE = {
+  shape: Shape,
+  stroke: Stroke,
+  color: Color,
+  bgColor: Color
+} 
 class Canvas implements DragTarget {
   hostElement: HTMLDivElement
   element: HTMLDivElement
   shape: Shape
   stroke: Stroke
+  color: Color
+  bgColor: Color
   key?: string
 
   constructor (
     hostElement: HTMLDivElement,
-    config: { shape: Shape, stroke: Stroke },
+    config: RESPONSE_TYPE,
     key?: string
   ) {
     this.hostElement = hostElement
     this.key = key
     this.shape = config.shape
     this.stroke = config.stroke
+    this.color = config.color
+    this.bgColor = config.bgColor
 
     this.element = this.renderCanvas()
     this.configure()
@@ -66,9 +76,14 @@ class Canvas implements DragTarget {
         break;
       }
     }
-    const color: string = this.stroke.color || 'white'
+    const color: string = this.color.name ? `border-${this.color.name}` : 'white'
     strokeClasses.push(color)
     element.classList.add(...strokeClasses)
+  }
+
+  private setBackground (element: HTMLElement): void {
+    const bgColor = (this.bgColor && !!this.bgColor.name) ? `bg-${this.bgColor.name}` : 'bg-transparent'
+    element.classList.add(bgColor)
   }
 
   private renderCanvas (): HTMLDivElement {
@@ -80,7 +95,10 @@ class Canvas implements DragTarget {
     this.hostElement.append(diagram)
     // stroke styles
     this.setStroke(element)
-    // strok styles:end
+    // stroke styles:end
+    // color 
+    this.setBackground(element)
+    // color : end
     return diagram
   }
 
@@ -95,13 +113,17 @@ class Canvas implements DragTarget {
   @autobind
   dropHandler(event: DragEvent) {
     const jsonStr = event.dataTransfer!.getData('text/plain')
-    const obj: { shape: Shape, stroke: Stroke } = JSON.parse(jsonStr)
+    const obj: RESPONSE_TYPE = JSON.parse(jsonStr)
     if (obj.hasOwnProperty('shape')) {
       const {key} = obj.shape
       // todo: create a projectState class and save everything there
       this.shape = ShapeItemsObj[key] || {}
     } else if (obj.hasOwnProperty('stroke')) {
       this.stroke = obj.stroke
+    } else if (obj.hasOwnProperty('color')) {
+      this.color = obj.color
+    } else if (obj.hasOwnProperty('bgColor')) {
+      this.bgColor = obj.bgColor
     }
     this.renderCanvas()
     this.element = this.renderCanvas()

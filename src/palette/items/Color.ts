@@ -10,6 +10,10 @@ const colors = [
   'pink-200', 'pink-400', 'pink-600',
 ]
 
+const TransparentColor: Color = {
+  name: 'transparent'
+}
+
 const ColorsItemsList: Color[] = [
   ...colors.map(c => ({ name: c }))
 ]
@@ -19,4 +23,4 @@ const ColorsItemsObj = colors.reduce((obj, c) => {
   return obj
 }, {})
 
-export { ColorsItemsList, ColorsItemsObj }
+export { ColorsItemsList, ColorsItemsObj, TransparentColor }

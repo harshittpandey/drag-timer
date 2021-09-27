@@ -7,6 +7,9 @@ const colors = [
     'indigo-200', 'indigo-400', 'indigo-600',
     'pink-200', 'pink-400', 'pink-600',
 ];
+const TransparentColor = {
+    name: 'transparent'
+};
 const ColorsItemsList = [
     ...colors.map(c => ({ name: c }))
 ];
@@ -14,4 +17,4 @@ const ColorsItemsObj = colors.reduce((obj, c) => {
     Object.assign(obj, { c: { name: c } });
     return obj;
 }, {});
-export { ColorsItemsList, ColorsItemsObj };
+export { ColorsItemsList, ColorsItemsObj, TransparentColor };

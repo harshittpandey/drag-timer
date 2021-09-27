@@ -3,7 +3,7 @@ import { createHtmlElement } from "../shared/utils.js"
 
 enum SHAPE_ENUM { Rectangle, Circle, RoundedRectangle, Square }
 enum STROKE_ENUM { Thin, Medium, Dark, Custom}
-enum PALETTE_TYPE { Shape, Stroke, Color }
+enum PALETTE_TYPE { Shape, Stroke, Color, BgColor }
 
 // type PaletteType = { Shape: PALETTE_TYPE.Shape }
 
