@@ -1,4 +1,4 @@
-import { Palette } from "./palette/Palette.js";
+import { Palette } from "./palette/palette.js";
 import { Canvas, defaultConfig } from "./canvas/canvas.js";
 import { PALETTE_TYPE } from "./palette/shared.js";
 import { ShapesItemsList } from "./palette/items/Shape.js";

@@ -9,6 +9,7 @@ class ProjectState {
             case PALETTE_TYPE.Shape: return 0;
             case PALETTE_TYPE.Stroke: return 1;
             case PALETTE_TYPE.Color: return 2;
+            default: return -1;
         }
     }
     getCanvas() {
