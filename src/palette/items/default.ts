@@ -6,7 +6,7 @@ const defaultConfig = {
   shape: ShapesItemsList[0],
   stroke: StrokesItemsList[0],
   color: ColorsItemsList[0],
-  bgColor: ColorsItemsList[0]
+  bgColor: TransparentColor
 }
 
 export { defaultConfig }
