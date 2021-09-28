@@ -5,6 +5,7 @@ import { ShapesItemsList } from "./palette/items/Shape.js";
 import { StrokesItemsList } from "./palette/items/Stroke.js";
 import { ColorsItemsList, TransparentColor } from "./palette/items/Color.js";
 import { ProjectState } from "./state/ProjectState.js";
+import { Timer } from "./timer/timer.js";
 function init() {
     /*
       shapes palette
@@ -36,6 +37,14 @@ function init() {
     */
     const canvasDiv = document.querySelector('#canvas'); // hostElement
     const canvas = new Canvas(canvasDiv, defaultConfig);
+    /*
+      timer in canvas
+    */
+    const timer = new Timer();
+    const startButton = document.querySelector('#startTimer');
+    const stopButton = document.querySelector('#stopTimer');
+    startButton.addEventListener('click', () => timer.startTimer());
+    stopButton.addEventListener('click', () => timer.stopTimer());
     var store = new ProjectState(canvas, [shapePalette, strokePalette, colorPalette]);
 }
 init();
