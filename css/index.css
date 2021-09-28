@@ -1,3 +1,16 @@
+.font-marvel {
+  font-family: 'Marvel', sans-serif;
+}
+
+.text-largest {
+  font-size: 5rem;
+  line-height: 0;
+}
+
+.label-size {
+  font-size: 1.5rem;
+}
+
 .warning-text  {
   font-size: 10.5px;
   position: absolute;

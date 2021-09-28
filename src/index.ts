@@ -10,6 +10,8 @@ import { ColorsItemsList, TransparentColor } from "./palette/items/Color.js"
 
 import { ProjectState } from "./state/ProjectState.js"
 
+import { Timer } from "./timer/timer.js"
+
 function init() {
   /*
     shapes palette
@@ -41,8 +43,17 @@ function init() {
   */
   const canvasDiv = document.querySelector('#canvas')! as HTMLDivElement; // hostElement
   const canvas = new Canvas(canvasDiv, defaultConfig)
+  /*
+    timer in canvas
+  */
+  const timer = new Timer()
+  const startButton = document.querySelector('#startTimer')! as HTMLButtonElement
+  const stopButton = document.querySelector('#stopTimer')! as HTMLButtonElement
+  startButton.addEventListener('click', () => timer.startTimer())
+  stopButton.addEventListener('click', () => timer.stopTimer())
 
   var store = new ProjectState(canvas, [ shapePalette, strokePalette, colorPalette ])
+
 }
 
 init()
